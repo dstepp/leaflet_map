@@ -24,7 +24,7 @@ L.marker([38.862, -77.05]).addTo(map)
 // }).addTo(map);
 
 
-var layerGroup = L.geoJSON(data, {
+var geojson = L.geoJSON(data, {
   onEachFeature: function (feature, layer) {
     layer.bindPopup('<h1>'+feature.properties.city_name+'</h1>'
     				+'<p>State Name: '+ feature.properties.state_name+'</p>'
@@ -33,4 +33,11 @@ var layerGroup = L.geoJSON(data, {
     				+'<p>Population: ' + feature.properties.population+ '</p>'
     				+'<p>Density: ' + feature.properties.density+ '</p>');
   }
-}).addTo(map);
+});
+
+
+
+
+var markers = L.markerClusterGroup();
+markers.addLayer(geojson);
+map.addLayer(markers);
